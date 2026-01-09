@@ -1,63 +1,51 @@
-liste = [
-('Krause','Stefanie','Brandenburgische Str. 20','74343,Sachsenheim'),
-('Brandt','Mandy','Scharnweberstrasse 84','68199','Mannheim Almenhof'),
-('Möller','Jens','Schoenebergerstrasse 47','08313,Bernsbach'),
-...
-]
-
-d = int(input("Geben Sie eine Zahl ein: "))
+liste = [2,5,9,13,17,21,26,29,34,38,41,46,50,54,58,63,67,71,75,79,84,88,92,96,101,105,109,113,117,121,126,130,134,138,143,147,151,155,159,163,168,172,176,180,185,189,193,197,202,206,210,214,219,223,227,231,235,239,244,248,252,256,261,265,269,273,277,281,286,290,294,298,303,307,311,315,319,323,328,332,336,340,345,349,353,357,361,365,370,374,378,382,387,391,395,399,403,407,412,416,420,424,429,433,437,441,445,449,454,458,462,466,471,475,479,483,487,491,496,500,504,508,513,517,521,525,529,533,538,542,546,550,555,559,563,567,571,575,580,584,588,592,597,601,605,609,613,617,622,626,630,634,639,643,647,651,655,659,664,668,672,676,681,685,689,693,697,701,706,710,714,718,723,727,731,735,739,743,748,752,756,760,765,769,773,777,781,785,790,794,798,802,807,811,815,819,823,827,832,836,840,844,849,853,857,861,865,869,874,878,882,886,891,895,899,903,907,911,916,920,924,928,933,937,941,945,949,953,958,962,966,970,975,979,983,987,991,995]
 
 
 
 def linearesuche(x, liste):
     i = 0
     E = -1
+    v = 0
     gefunden = False
     while i < len(liste) and gefunden == False:
         if liste[i] == x:
             gefunden = True
             E = i
+            v = v+1
         else:
             i = i+1
-    return E
+            v = v+1
+    return E, v
 
-def binsuche_sortiert(d, liste):
+def binsuche(d, liste):
     E = -1
     Gl = d
     Gl = 0
     Gr = len(liste) - 1
     gefunden = False
+    v = 0
     while gefunden == False and Gr >= Gl:
         m = (Gl + Gr) // 2
         if liste[m] == d:
             gefunden = True
             E = m
+            v = v + 1
         elif d < liste[m]:
             Gr = m -1
+            v = v + 1
         elif d > liste[m]:
             Gl = m + 1
-    return E
+            v = v + 1
+    return E, v
 
-from listenoperationen_zum_laden_und_speichern import *
+def vergleichsuche(d, liste):
+    x = binsuche(d, liste)
+    y = linearesuche(d, liste)
+    print(x[1])
+    print(y[1])
+    if x[0] == y[0]:
+        print(x[0])
+    else:
+        print("Fehler")
 
-def suchen(name, liste):
-    indexErgebnis = -1
-    gefunden = False
-    links = 0
-    rechts = len(liste)-1
-    while not gefunden and links <= rechts:
-        mitte = (links + rechts) // 2
-        if name == liste[mitte][0]:
-            gefunden = True
-            indexErgebnis = mitte
-        elif name < liste[mitte][0]:
-            rechts = mitte-1
-        else:
-            links = mitte+1
-    return indexErgebnis
-
-# Test
-text = textAusDatei('adressdaten_sortiert_name.csv')
-listeDaten = tupelListeAusText(text)
-index = suchen('Schmitt', listeDaten)
-print(index)
+vergleichsuche(995, liste)
