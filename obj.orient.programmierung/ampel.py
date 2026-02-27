@@ -38,3 +38,16 @@ class Ampel(object):
             self.h = False
         else:
             self.h = True
+
+
+from random import*
+
+class wurfel(object):
+    def __init__(self, seitenzahl):
+        self.s = seitenzahl
+
+    def wurfeln(self):
+        self.r = randint(1,self.s)
+
+    def getAugen(self):
+        return self.r
