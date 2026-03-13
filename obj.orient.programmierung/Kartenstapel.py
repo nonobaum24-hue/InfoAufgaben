@@ -1,0 +1,65 @@
+#-----------------------------------------------------------
+# Kartenstapel
+#-----------------------------------------------------------
+
+from random import randint
+
+class Kartenstapel:
+    def __init__(self):
+        self.kartenListe = [
+            'X-A', 'X-K', 'X-D', 'X-B', 'X-10', 'X-9', 'X-8', 'X-7',
+            'P-A', 'P-K', 'P-D', 'P-B', 'P-10', 'P-9', 'P-8', 'P-7',
+            'H-A', 'H-K', 'H-D', 'H-B', 'H-10', 'H-9', 'H-8', 'H-7',
+            'K-A', 'K-K', 'K-D', 'K-B', 'K-10', 'K-9', 'K-8', 'K-7'
+            ]
+
+    def mischen(self):
+        neueListe = []
+        aktuelleAnzahl = len(self.kartenListe)
+        while aktuelleAnzahl > 0:
+            i = randint(0, aktuelleAnzahl-1)
+            neueListe = neueListe + [self.kartenListe[i]]
+            del self.kartenListe[i]
+            aktuelleAnzahl = len(self.kartenListe)
+        self.kartenListe = neueListe
+
+    def istLeer(self):
+        if len(self.kartenListe) > 0:
+            ergebnis = False
+        else:
+            ergebnis = True
+        return ergebnis
+
+    def karteZiehen(self):
+        if len(self.kartenListe) > 0:
+            gezogeneKarte = self.kartenListe[0]
+            self.kartenListe = self.kartenListe[1:]
+        else:
+            gezogeneKarte = None
+        return gezogeneKarte
+            
+
+class Kartenhaufen:
+    def __init__(self):
+        self.kartenListe = []
+        self.wert = 0
+
+    def hinzufuegen(self, karte):
+        self.kartenListe = self.kartenListe + [karte]
+        if karte[2] == 'A':
+            kartenwert = 11
+        elif karte[2] == 'K':
+            kartenwert = 4
+        elif karte[2] == 'D':
+            kartenwert = 3
+        elif karte[2] == 'B':
+            kartenwert = 2
+        elif karte[2] == '10':
+            kartenwert = 10
+        elif karte[2] == '9':
+            kartenwert = 9
+        elif karte[2] == '8':
+            kartenwert = 8
+        elif karte[2] == '7':
+            kartenwert = 7
+        self.wert = self.wert + kartenwert
