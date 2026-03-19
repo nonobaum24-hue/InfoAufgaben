@@ -1,4 +1,4 @@
-from Kartenstapel import *
+from kartenstapel import *
 
 h1 = Kartenhaufen()
 h2 = Kartenhaufen()
