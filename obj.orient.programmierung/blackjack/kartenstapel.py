@@ -46,6 +46,7 @@ class Kartenhaufen:
 
     def hinzufuegen(self, karte):
         self.kartenListe = self.kartenListe + [karte]
+        kartenwert = 0
         if karte[2] == 'A':
             kartenwert = 11
         elif karte[2] == 'K':
